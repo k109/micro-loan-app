@@ -11,8 +11,6 @@ public class DataValidationServiceTestData {
     private static final BigDecimal CORRECT_AMOUNT_EXAMPLE = new BigDecimal(1000);
     private static final BigDecimal INCORRECT_AMOUNT_EXAMPLE = new BigDecimal(6000);
 
-
-
     public static Loan getCorrectLoan() {
         Loan loan = new Loan();
         loan.setNumberOfMonths(CORRECT_NUMBER_OF_MONTHS_EXAMPLE);
