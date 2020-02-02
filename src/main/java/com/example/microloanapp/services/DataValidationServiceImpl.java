@@ -2,6 +2,7 @@ package com.example.microloanapp.services;
 
 import com.example.microloanapp.exceptions.DataInputException;
 import com.example.microloanapp.model.Loan;
+import com.example.microloanapp.constants.LoanApplicationConstraints;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,10 +10,10 @@ import java.math.BigDecimal;
 @Service
 public class DataValidationServiceImpl implements DataValidationService {
 
-    private static final int MIN_NUMBER_OF_MONTHS = 1;
-    private static final int MAX_NUMBER_OF_MONTHS = 6;
-    private static final BigDecimal MIN_ALLOWED_AMOUNT = new BigDecimal(500);
-    private static final BigDecimal MAX_ALLOWED_AMOUNT = new BigDecimal(5000);
+    private static final int MIN_NUMBER_OF_MONTHS = LoanApplicationConstraints.MIN_NUMBER_OF_MONTHS;
+    private static final int MAX_NUMBER_OF_MONTHS = LoanApplicationConstraints.MAX_NUMBER_OF_MONTHS;
+    private static final BigDecimal MIN_ALLOWED_AMOUNT = LoanApplicationConstraints.MIN_ALLOWED_AMOUNT;
+    private static final BigDecimal MAX_ALLOWED_AMOUNT = LoanApplicationConstraints.MAX_ALLOWED_AMOUNT;
 
     @Override
     public void validateInput(Loan loan) {
