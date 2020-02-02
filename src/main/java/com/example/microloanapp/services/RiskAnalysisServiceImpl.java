@@ -45,10 +45,8 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService{
     }
 
     private void checkClientIp(String ip) {
-        Long numberOfLoans = loanRepository.findAll().stream()
-                .filter(l -> l.getIp().equalsIgnoreCase(ip))
-                .count();
-        if(numberOfLoans == MAX_NUMBER_OF_LOANS_PER_IP) {
+        long numberOfIps = loanRepository.countAllByIp(ip);
+        if(numberOfIps == MAX_NUMBER_OF_LOANS_PER_IP) {
             throw new RiskyOperationException("Max number of loans reached for this ip: " + ip);
         }
     }
