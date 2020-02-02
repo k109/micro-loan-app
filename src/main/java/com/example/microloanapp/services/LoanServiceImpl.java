@@ -1,9 +1,10 @@
 package com.example.microloanapp.services;
 
+import com.example.microloanapp.constants.LoanApplicationConstraints;
 import com.example.microloanapp.exceptions.LoanDoesntExistException;
 import com.example.microloanapp.model.Loan;
 import com.example.microloanapp.repositories.LoanRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,8 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoanServiceImpl implements LoanService{
+
+    private static final int NUMBER_OF_GRACE_PERIOD_DAYS = LoanApplicationConstraints.NUMBER_OF_DAYS_WHEN_POSTPONING_PAYMENT;
 
     private final LoanRepository loanRepository;
     private final DataValidationService dataValidationService;
@@ -48,8 +51,9 @@ public class LoanServiceImpl implements LoanService{
         if(!loan.isPaymentPeriodExtended()) {
             loan.setPaymentPeriodExtended(true);
             LocalDate currentPaymentDate = loan.getEndDate();
-            loan.setEndDate(currentPaymentDate.plusDays(14));
+            loan.setEndDate(currentPaymentDate.plusDays(NUMBER_OF_GRACE_PERIOD_DAYS));
+            loan = loanRepository.save(loan);
         }
-        return loanRepository.save(loan);
+        return loan;
     }
 }

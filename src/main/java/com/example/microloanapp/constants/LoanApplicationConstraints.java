@@ -12,4 +12,5 @@ public class LoanApplicationConstraints {
     public static final LocalTime BEGIN_OF_HAZARDOUS_TIMEFRAME = LocalTime.of(0,0,0,0);
     public static final LocalTime END_OF_HAZARDOUS_TIMEFRAME = LocalTime.of(6,0,0,0);
     public static final long MAX_NUMBER_OF_LOANS_PER_IP = 2;
+    public static final int NUMBER_OF_DAYS_WHEN_POSTPONING_PAYMENT = 14;
 }

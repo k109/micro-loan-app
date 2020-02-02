@@ -1,6 +1,7 @@
 package com.example.microloanapp.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DateTimeProviderServiceImpl implements DateTimeProviderService {
 
     private final Clock clock;
