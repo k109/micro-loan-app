@@ -20,6 +20,7 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService{
     private static final long MAX_NUMBER_OF_LOANS_PER_IP = LoanApplicationConstraints.MAX_NUMBER_OF_LOANS_PER_IP;
 
     private final LoanRepository loanRepository;
+    private final DateTimeProviderService dateTimeProviderService;
 
     @Override
     public void assesRisk(Loan loan) {
@@ -32,7 +33,7 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService{
     }
 
     private boolean isTimeFrameHazardous() {
-        LocalTime time = LocalTime.now();
+        LocalTime time = dateTimeProviderService.getCurrentTime();
         return time.compareTo(BEGIN_OF_HAZARDOUS_TIMEFRAME) >= 0
                 && time.compareTo(END_OF_HAZARDOUS_TIMEFRAME) < 0;
     }
