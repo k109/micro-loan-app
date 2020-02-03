@@ -19,7 +19,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return new ResponseEntity<Object>("Operation is to risky, loan NOT GRANTED, " + exception.getMessage(),
                 new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
     }
-
     @ExceptionHandler(value = {DataInputException.class})
     public ResponseEntity<Object> handleIncorectDataInput(Exception exception, WebRequest request) {
         return new ResponseEntity<Object>("Input data incorect, " + exception.getMessage(),
@@ -28,7 +27,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(value = {LoanDoesntExistException.class})
     public ResponseEntity<Object> handleMissingLoan(Exception exception, WebRequest request) {
-        return new ResponseEntity<Object>("Could not extend payment because of missing loan with given id, " + exception.getMessage(),
+        return new ResponseEntity<Object>("Could not extend payment there is no loan with given id, " + exception.getMessage(),
                 new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 }

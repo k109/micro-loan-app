@@ -5,6 +5,7 @@ import com.example.microloanapp.exceptions.LoanDoesntExistException;
 import com.example.microloanapp.model.Loan;
 import com.example.microloanapp.repositories.LoanRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class LoanServiceImpl implements LoanService{
     @Override
     public Loan findById(Long id) {
         return Optional.ofNullable(loanRepository.findById(id))
+                .filter(o -> o.isPresent())
                 .map(Optional::get)
                 .orElseThrow(() -> new LoanDoesntExistException("Loan with id: " + id + " doesn't exist"));
     }
